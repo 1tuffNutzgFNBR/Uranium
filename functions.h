@@ -36,6 +36,12 @@ namespace Functions
 		return PlayerController;
 	}
 
+	static void SwitchLevel(FString URL)
+	{
+		auto fn = FindObject(crypt("Function /Script/Engine.PlayerController.SwitchLevel"));
+		ProcessEvent(Globals::PlayerController, fn, &URL);
+	}
+
 	static void UnlockConsole()
 	{
 		auto FortGameViewportClient = FindObject(crypt("FortGameViewportClient /Engine/Transient.FortEngine_"));

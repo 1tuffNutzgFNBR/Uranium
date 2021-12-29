@@ -16,19 +16,38 @@ namespace Hooks
 		auto object_name = pObject->GetFullName();
 
 		if (object_name.find("UAC") != std::string::npos) return nullptr;
+		if (object_name.find("EasyAntiCheat") != std::string::npos) return nullptr;
+		if (object_name.find("BattlEye") != std::string::npos) return nullptr;
+
+		if (func_name.find("BndEvt__PlayButton_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature") != std::string::npos)
+		{
+			Functions::UpdatePlayerController();
+			Functions::SwitchLevel(crypt(L"Artemis_Terrain?game=/Game/Athena/Athena_GameMode.Athena_GameMode_C"));
+		}
+
+		if (func_name.find("ReadyToStartMatch") != std::string::npos && !Globals::bIsInGame)
+		{
+
+		}
 
 		if (func_name.find("Tick") != std::string::npos)
 		{
 			if (GetAsyncKeyState(VK_F1) & 0x1)
 			{
+				Functions::EnableCheatManager();
+			}
+			if (GetAsyncKeyState(VK_F2) & 0x1)
+			{
+				Functions::DisableCheatManager();
+			}
+			if (GetAsyncKeyState(VK_F3) & 0x1)
+			{
 				Functions::UpdatePlayerController();
-				Functions::UnlockConsole();
 			}
 		}
 
 		return PEOG(pObject, pFunction, pParams);
 	}
-
 	static void Sink()
 	{
 		MH_CreateHook((void*)process_event_address, ProcessEventDetour, (void**)(&PEOG));

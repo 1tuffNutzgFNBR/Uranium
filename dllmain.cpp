@@ -42,7 +42,7 @@ DWORD WINAPI EngineCheckThread(LPVOID)
             SetupRest();
         }
 
-        Sleep(1000 / 60);
+        Sleep(1000 / 10);
     }
 
     return 0;

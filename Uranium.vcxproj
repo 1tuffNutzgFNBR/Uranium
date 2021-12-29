@@ -90,6 +90,7 @@
     <ClCompile Include="dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="artemis.h" />
     <ClInclude Include="consolecolor.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="enginehooks.h" />
