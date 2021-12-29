@@ -36,5 +36,8 @@
     <ClInclude Include="functions.h">
       <Filter>Unreal</Filter>
     </ClInclude>
+    <ClInclude Include="artemis.h">
+      <Filter>Unreal</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

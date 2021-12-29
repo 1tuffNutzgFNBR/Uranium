@@ -6,4 +6,5 @@ namespace Globals
 {
 	inline UObject** GWorld;
 	inline UObject* PlayerController;
+	inline bool bIsInGame;
 }

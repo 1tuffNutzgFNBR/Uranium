@@ -16,10 +16,18 @@ namespace Hooks
 		auto object_name = pObject->GetFullName();
 
 		if (object_name.find("UAC") != std::string::npos) return nullptr;
+		if (object_name.find("EasyAntiCheat") != std::string::npos) return nullptr;
+		if (object_name.find("BattlEye") != std::string::npos) return nullptr;
 
 		if (func_name.find("BndEvt__PlayButton_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature") != std::string::npos)
 		{
 			Functions::UpdatePlayerController();
+			Functions::SwitchLevel(crypt(L"Artemis_Terrain?game=/Game/Athena/Athena_GameMode.Athena_GameMode_C"));
+		}
+
+		if (func_name.find("ReadyToStartMatch") != std::string::npos && !Globals::bIsInGame)
+		{
+
 		}
 
 		if (func_name.find("Tick") != std::string::npos)
@@ -35,10 +43,6 @@ namespace Hooks
 			if (GetAsyncKeyState(VK_F3) & 0x1)
 			{
 				Functions::UpdatePlayerController();
-			}
-			if (GetAsyncKeyState(VK_F4) & 0x1)
-			{
-				Functions::CustomSkin("F_MED_ASN_Sarah_Head_02_ATH.F_MED_ASN_Sarah_Head_02_ATH", "CP_028_Athena_Body.CP_028_Athena_Body");
 			}
 		}
 
