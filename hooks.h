@@ -17,6 +17,11 @@ namespace Hooks
 
 		if (object_name.find("UAC") != std::string::npos) return nullptr;
 
+		if (func_name.find("BndEvt__PlayButton_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature") != std::string::npos)
+		{
+			Functions::UpdatePlayerController();
+		}
+
 		if (func_name.find("Tick") != std::string::npos)
 		{
 			if (GetAsyncKeyState(VK_F1) & 0x1)

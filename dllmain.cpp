@@ -30,7 +30,6 @@ void SetupRest()
     Hooks::process_event_address = processevent_address;
     Hooks::Sink();
     Util::Log(0, crypt("ProcessEvent hooked!"));
-    Functions::UpdatePlayerController();
     Functions::UnlockConsole();
     Util::Log(0, crypt("Console unlocked!"));
 }
@@ -40,11 +39,8 @@ DWORD WINAPI EngineCheckThread(LPVOID)
     bool bShouldLoop = true;
 
     while (bShouldLoop) {
-        if (FindObject(crypt("FortEngine_"))) {
+        if (FindObject(crypt("FortEngine_")) != nullptr) {
             bShouldLoop = false;
-
-            Sleep(5500);
-
             SetupRest();
         }
 
