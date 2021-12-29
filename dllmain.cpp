@@ -12,6 +12,7 @@ DWORD WINAPI MainThread(LPVOID)
     Util::Log(0, skCrypt("MinHook initialized!").decrypt());
     EngineHooks::Sink();
     Util::Log(0, skCrypt("EngineHooks sank!").decrypt());
+
     
     /*
     MH_CreateHook((void*)PEAddr, ProcessEventDetour, (void**)(&PEOG));
