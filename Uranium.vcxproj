@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="consolecolor.h" />
+    <ClInclude Include="enginehooks.h" />
     <ClInclude Include="skCrypter.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>

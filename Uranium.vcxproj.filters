@@ -18,5 +18,8 @@
     <ClInclude Include="skCrypter.h">
       <Filter>Uranium</Filter>
     </ClInclude>
+    <ClInclude Include="enginehooks.h">
+      <Filter>Uranium</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

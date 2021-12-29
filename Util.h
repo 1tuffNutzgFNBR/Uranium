@@ -6,8 +6,9 @@
 #include <libloaderapi.h>
 #include <Psapi.h>
 #include "consolecolor.h"
+#include "skCrypter.h"
 
-#define ShowMessage(message) MessageBoxA(NULL, message, crypt("Uranium-235"), MB_OK)
+#define ShowMessage(message) MessageBoxA(NULL, message, skCrypt("Uranium-235"), MB_OK)
 #define CHECKSIG(sig, error) if (!sig) { ShowMessage(error); }
 
 class Util
@@ -20,13 +21,13 @@ public:
 		FILE* pFile;
 		freopen_s(&pFile, "CONOUT$", "w", stdout);
 		
-		std::cout << R"(                          _               
+		std::cout << skCrypt(R"(                          _               
   __  ___________ _____  (_)_  ______ ___ 
  / / / / ___/ __ `/ __ \/ / / / / __ `__ \
 / /_/ / /  / /_/ / / / / / /_/ / / / / / /
 \__,_/_/   \__,_/_/ /_/_/\__,_/_/ /_/ /_/ 
-                                          )" << std::endl;
-		std::cout << "Thanks to everyone who helped work on this project! <3" << std::endl;
+                                          )") << std::endl;
+		std::cout << skCrypt("Thanks to everyone who helped work on this project! <3") << std::endl;
 	}
 
 	static void Log(int type, std::string text) // 0 = Info 1 = Error
