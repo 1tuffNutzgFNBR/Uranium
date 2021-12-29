@@ -94,7 +94,9 @@
     <ClInclude Include="engine.h" />
     <ClInclude Include="enginehooks.h" />
     <ClInclude Include="enums.h" />
+    <ClInclude Include="functions.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="hooks.h" />
     <ClInclude Include="skCrypter.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="util.h" />

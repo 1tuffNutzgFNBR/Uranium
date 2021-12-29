@@ -3,7 +3,12 @@
 #include "structs.h"
 #include "enums.h"
 
-inline void* (*ProcessEvent)(UObject* pObject, UObject* pFunction, void* pParams);
+inline bool ProcessEvent(UObject* pObject, UObject* pFunction, void* pParams) {
+	auto vtable = *reinterpret_cast<void***>(pObject);
+	auto ProcesseventVtable = static_cast<void(*)(void*, void*, void*)>(vtable[0x4B]); if (!ProcesseventVtable) return false;
+	ProcesseventVtable(pObject, pFunction, pParams);
+	return true;
+}
 inline UObject* (*SpawnActorLong)(UObject* UWorld, UObject* Class, FTransform const* UserTransformPtr, const FActorSpawnParameters& SpawnParameters);
 
 static UObject* FindObject(std::string name)

@@ -36,5 +36,11 @@
     <ClInclude Include="engine.h">
       <Filter>Unreal</Filter>
     </ClInclude>
+    <ClInclude Include="hooks.h">
+      <Filter>Unreal</Filter>
+    </ClInclude>
+    <ClInclude Include="functions.h">
+      <Filter>Unreal</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
