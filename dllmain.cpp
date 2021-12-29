@@ -54,6 +54,7 @@ DWORD WINAPI MainThread(LPVOID)
     Hooks::process_event_address = processevent_address;
     Hooks::Sink();
     Util::Log(0, crypt("ProcessEvent hooked!"));
+    Functions::UpdatePlayerController();
     Functions::UnlockConsole();
     Util::Log(0, crypt("Console unlocked!"));
 

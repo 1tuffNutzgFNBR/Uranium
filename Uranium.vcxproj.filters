@@ -24,12 +24,6 @@
     <ClInclude Include="enginehooks.h">
       <Filter>Uranium</Filter>
     </ClInclude>
-    <ClInclude Include="structs.h">
-      <Filter>Unreal</Filter>
-    </ClInclude>
-    <ClInclude Include="enums.h">
-      <Filter>Unreal</Filter>
-    </ClInclude>
     <ClInclude Include="globals.h">
       <Filter>Unreal</Filter>
     </ClInclude>

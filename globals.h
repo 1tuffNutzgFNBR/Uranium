@@ -1,7 +1,4 @@
 #pragma once
-
-#include "structs.h"
-#include "enums.h"
 #include "engine.h"
 #include "skCrypter.h"
 
