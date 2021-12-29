@@ -34,22 +34,21 @@ DWORD WINAPI MainThread(LPVOID)
     CHECKSIG(pFreeMemory, "Failed to find FreeMemory address!");
     FreeMemory = decltype(FreeMemory)(pFreeMemory);
 
+    auto PEIndex = 0x4B;
+
     // 19
     auto pWorld = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 4D 8B C1"), true, 3);
     if (!pWorld) {
         // 17 - 18
         pWorld = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 4D 8B C2"), true, 3);
+        PEIndex = 0x44;
     }
     CHECKSIG(pWorld, "Failed to find UWorld address!");
     Globals::GWorld = reinterpret_cast<UObject**>(pWorld);
 
-    Globals::Init();
-    Globals::Offsets::Init();
-    Util::Log(0, crypt("Functions & Offsets initialized!"));
-
     auto FortEngine = FindObject(crypt("FortEngine /Engine/Transient.FortEngine"));
     auto FortEngineVirtual = *reinterpret_cast<void***>(FortEngine);
-    auto processevent_address = FortEngineVirtual[0x4B];
+    auto processevent_address = FortEngineVirtual[PEIndex];
 
     Hooks::process_event_address = processevent_address;
     Hooks::Sink();
