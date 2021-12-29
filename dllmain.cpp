@@ -12,6 +12,7 @@
 void SetupRest()
 {
     Globals::PEIndex = 0x4B;
+    Globals::bIsApollo = false;
 
     // 19
     auto pWorld = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 4D 8B C1"), true, 3);
@@ -19,6 +20,7 @@ void SetupRest()
         // 17 - 18
         pWorld = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 4D 8B C2"), true, 3);
         Globals::PEIndex = 0x44;
+        Globals::bIsApollo = true;
     }
     CHECKSIG(pWorld, "Failed to find UWorld address!");
     Globals::GWorld = reinterpret_cast<UObject**>(pWorld);
