@@ -13,6 +13,16 @@ inline bool ProcessEvent(UObject* pObject, UObject* pFunction, void* pParams)
 	return true;
 }
 
+static UObject* SpawnActor(UObject* Class, FTransform Transform)
+{
+	auto SpawnActorParams = FActorSpawnParameters();
+	SpawnActorLong((*Globals::GWorld), (UClass*)Class, &Transform, SpawnActorParams);
+}
+
+static UObject* SpawnActor(UObject* Class, FVector location, FRotator rotation)
+{
+}
+
 namespace Functions
 {
 	static UObject* UpdatePlayerController()

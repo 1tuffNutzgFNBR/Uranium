@@ -13,6 +13,14 @@
 #include "util.h"
 
 struct UObject;
+struct FTransform;
+struct FVector;
+struct FRotator;
+struct UClass;
+struct FActorSpawnParameters;
+
+inline UObject* (*SpawnActorLong)(UObject* UWorld, UClass* Class, FTransform const* UserTransformPtr,
+	const FActorSpawnParameters& SpawnParameters);
 
 static UObject* StaticLoadObject(UObject* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* FileName = nullptr, uint32_t LoadFlags = 0, void* Sandbox = nullptr, bool bAllowObjectReconciliation = false, void* InstancingContext = nullptr)
 {
