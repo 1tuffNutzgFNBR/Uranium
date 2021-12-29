@@ -90,14 +90,9 @@
     <ClCompile Include="dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Functions.h" />
-    <ClInclude Include="GUI.h" />
-    <ClInclude Include="Hooks.h" />
-    <ClInclude Include="OffsetTable.hpp" />
-    <ClInclude Include="skCryptor.h" />
-    <ClInclude Include="stringutils.h" />
-    <ClInclude Include="UE5.h" />
-    <ClInclude Include="Util.h" />
+    <ClInclude Include="consolecolor.h" />
+    <ClInclude Include="skCrypter.h" />
+    <ClInclude Include="util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

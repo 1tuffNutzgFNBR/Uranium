@@ -5,15 +5,10 @@
 #include <vector>
 #include <libloaderapi.h>
 #include <Psapi.h>
+#include "consolecolor.h"
 
-#define ShowMessage(message) MessageBoxA(NULL, message, crypt("SodiumV2"), MB_OK)
+#define ShowMessage(message) MessageBoxA(NULL, message, crypt("Uranium-235"), MB_OK)
 #define CHECKSIG(sig, error) if (!sig) { ShowMessage(error); }
-
-#define DetoursEasy(address, hook) \
-	DetourTransactionBegin(); \
-    DetourUpdateThread(GetCurrentThread()); \
-    DetourAttach(&(PVOID&)address, hook); \
-    DetourTransactionCommit();
 
 class Util
 {
@@ -24,6 +19,29 @@ public:
 
 		FILE* pFile;
 		freopen_s(&pFile, "CONOUT$", "w", stdout);
+		
+		std::cout << R"(                          _               
+  __  ___________ _____  (_)_  ______ ___ 
+ / / / / ___/ __ `/ __ \/ / / / / __ `__ \
+/ /_/ / /  / /_/ / / / / / /_/ / / / / / /
+\__,_/_/   \__,_/_/ /_/_/\__,_/_/ /_/ /_/ 
+                                          )" << std::endl;
+		std::cout << "Thanks to everyone who helped work on this project! <3" << std::endl;
+	}
+
+	static void Log(int type, std::string text) // 0 = Info 1 = Error
+	{
+		if (type == 0)
+		{
+			std::cout << green << text.c_str() << std::endl;
+		}
+		else if (type == 1)
+		{
+			std::cout << red << text.c_str() << std::endl;
+		}
+		else {
+			return;
+		}
 	}
 
 	static __forceinline uintptr_t FindPattern(const char* signature, bool bRelative = false, uint32_t offset = 0)
