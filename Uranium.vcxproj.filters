@@ -7,6 +7,9 @@
     <Filter Include="Uranium">
       <UniqueIdentifier>{a9a9d908-f08b-4532-9c11-21bc5f4403fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Unreal">
+      <UniqueIdentifier>{40a04361-21fe-4db9-af7c-cf76112a6306}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util.h">
@@ -20,6 +23,18 @@
     </ClInclude>
     <ClInclude Include="enginehooks.h">
       <Filter>Uranium</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.h">
+      <Filter>Unreal</Filter>
+    </ClInclude>
+    <ClInclude Include="enums.h">
+      <Filter>Unreal</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>Unreal</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.h">
+      <Filter>Unreal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
