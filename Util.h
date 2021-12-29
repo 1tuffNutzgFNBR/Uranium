@@ -30,7 +30,7 @@ public:
 		std::cout << skCrypt("Thanks to everyone who helped work on this project! <3") << std::endl;
 	}
 
-	static void Log(int type, std::string text) // 0 = Info 1 = Error
+	static void Log(int type = 0, std::string text) // 0 = Info 1 = Error
 	{
 		if (type == 0)
 		{
