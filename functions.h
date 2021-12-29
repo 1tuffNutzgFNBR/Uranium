@@ -1,12 +1,12 @@
+#pragma once
+
 #include <Windows.h>
 #include "skCrypter.h"
 #include "engine.h"
 #include "globals.h"
-#ifndef _FUNCTIONS_H_
-#define _FUNCTIONS_H_
+
 namespace Functions
 {
-
 	static UObject* UpdatePlayerController()
 	{
 		auto FortEngine = FindObject(crypt("FortEngine /Engine/Transient.FortEngine"));
@@ -86,6 +86,4 @@ namespace Functions
 
 		ProcessEvent(KismetLib, fn, &params);
 	}
-
 }
-#endif
