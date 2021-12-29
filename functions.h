@@ -5,6 +5,14 @@
 #include "engine.h"
 #include "globals.h"
 
+inline bool ProcessEvent(UObject* pObject, UObject* pFunction, void* pParams)
+{
+	auto vtable = *reinterpret_cast<void***>(pObject);
+	auto ProcesseventVtable = static_cast<void(*)(void*, void*, void*)>(vtable[Globals::PEIndex]); if (!ProcesseventVtable) return false;
+	ProcesseventVtable(pObject, pFunction, pParams);
+	return true;
+}
+
 namespace Functions
 {
 	static UObject* UpdatePlayerController()
@@ -85,5 +93,11 @@ namespace Functions
 		params.PlayerState = PlayerState;
 
 		ProcessEvent(KismetLib, fn, &params);
+	}
+
+	static void SwitchLevel(FString URL)
+	{
+		auto fn = FindObject(crypt(""));
+		ProcessEvent(Globals::PlayerController, fn, &URL);
 	}
 }

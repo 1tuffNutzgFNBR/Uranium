@@ -11,27 +11,25 @@
 
 void SetupRest()
 {
-    auto PEIndex = 0x4B;
+    Globals::PEIndex = 0x4B;
 
     // 19
     auto pWorld = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 4D 8B C1"), true, 3);
     if (!pWorld) {
         // 17 - 18
         pWorld = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 4D 8B C2"), true, 3);
-        PEIndex = 0x44;
+        Globals::PEIndex = 0x44;
     }
     CHECKSIG(pWorld, "Failed to find UWorld address!");
     Globals::GWorld = reinterpret_cast<UObject**>(pWorld);
 
     auto FortEngine = FindObject(crypt("FortEngine /Engine/Transient.FortEngine"));
     auto FortEngineVirtual = *reinterpret_cast<void***>(FortEngine);
-    auto processevent_address = FortEngineVirtual[PEIndex];
+    auto processevent_address = FortEngineVirtual[Globals::PEIndex];
 
     Hooks::process_event_address = processevent_address;
     Hooks::Sink();
     Util::Log(0, crypt("ProcessEvent hooked!"));
-    Functions::UnlockConsole();
-    Util::Log(0, crypt("Console unlocked!"));
 }
 
 DWORD WINAPI EngineCheckThread(LPVOID)
@@ -55,8 +53,11 @@ DWORD WINAPI MainThread(LPVOID)
     Util::InitConsole();
     MH_Initialize();
     Util::Log(0, crypt("MinHook initialized!"));
+
     EngineHooks::Sink();
     Util::Log(0, crypt("EngineHooks sank!"));
+
+
     auto pGObjects = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 48 8B 0C C8 48 8B 04 D1"), true, 3);
     CHECKSIG(pGObjects, "Failed to find GObjects address!");
     GObjects = decltype(GObjects)(pGObjects);
