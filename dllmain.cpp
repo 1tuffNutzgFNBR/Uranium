@@ -9,6 +9,51 @@
 #include "globals.h"
 #include "functions.h"
 
+void SetupRest()
+{
+    auto PEIndex = 0x4B;
+
+    // 19
+    auto pWorld = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 4D 8B C1"), true, 3);
+    if (!pWorld) {
+        // 17 - 18
+        pWorld = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 4D 8B C2"), true, 3);
+        PEIndex = 0x44;
+    }
+    CHECKSIG(pWorld, "Failed to find UWorld address!");
+    Globals::GWorld = reinterpret_cast<UObject**>(pWorld);
+
+    auto FortEngine = FindObject(crypt("FortEngine /Engine/Transient.FortEngine"));
+    auto FortEngineVirtual = *reinterpret_cast<void***>(FortEngine);
+    auto processevent_address = FortEngineVirtual[PEIndex];
+
+    Hooks::process_event_address = processevent_address;
+    Hooks::Sink();
+    Util::Log(0, crypt("ProcessEvent hooked!"));
+    Functions::UpdatePlayerController();
+    Functions::UnlockConsole();
+    Util::Log(0, crypt("Console unlocked!"));
+}
+
+DWORD WINAPI EngineCheckThread(LPVOID)
+{
+    bool bShouldLoop = true;
+
+    while (bShouldLoop) {
+        if (FindObject(crypt("FortEngine_"))) {
+            bShouldLoop = false;
+
+            Sleep(5500);
+
+            SetupRest();
+        }
+
+        Sleep(1000 / 60);
+    }
+
+    return 0;
+}
+
 DWORD WINAPI MainThread(LPVOID)
 {
     Util::InitConsole();
@@ -34,28 +79,7 @@ DWORD WINAPI MainThread(LPVOID)
     CHECKSIG(pFreeMemory, "Failed to find FreeMemory address!");
     FreeMemory = decltype(FreeMemory)(pFreeMemory);
 
-    auto PEIndex = 0x4B;
-
-    // 19
-    auto pWorld = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 4D 8B C1"), true, 3);
-    if (!pWorld) {
-        // 17 - 18
-        pWorld = Util::FindPattern(crypt("48 8B 05 ? ? ? ? 4D 8B C2"), true, 3);
-        PEIndex = 0x44;
-    }
-    CHECKSIG(pWorld, "Failed to find UWorld address!");
-    Globals::GWorld = reinterpret_cast<UObject**>(pWorld);
-
-    auto FortEngine = FindObject(crypt("FortEngine /Engine/Transient.FortEngine"));
-    auto FortEngineVirtual = *reinterpret_cast<void***>(FortEngine);
-    auto processevent_address = FortEngineVirtual[PEIndex];
-
-    Hooks::process_event_address = processevent_address;
-    Hooks::Sink();
-    Util::Log(0, crypt("ProcessEvent hooked!"));
-    Functions::UpdatePlayerController();
-    Functions::UnlockConsole();
-    Util::Log(0, crypt("Console unlocked!"));
+    CreateThread(0, 0, EngineCheckThread, 0, 0, 0);
 
     return NULL;
 }
